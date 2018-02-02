@@ -25,7 +25,10 @@ GOBUILD = $(GOCMD) build $(FLAGS)
 all:	build
 
 .PHONY: build
-build:
+build: format test compile
+
+.PHONY: compile
+compile:
 	GOARCH=amd64 GOOS=darwin $(GOBUILD) -o $(DISTPATH).darwin ./$(PROJECT)
 	GOARCH=amd64 GOOS=linux $(GOBUILD) -o $(DISTPATH).linux ./$(PROJECT)
 
@@ -34,13 +37,20 @@ deploy: coverage build
 	echo "Creating tar file"
 	tar -zcf $(RELEASE_PATH)/$(PROJECT)-$(VERSION).tar.gz bin/$(PROJECT)*
 
+.PHONY: format
+format:
+	@for gofile in $$(find ./src/$(PROJECT) -name "*.go"); do \
+		echo "formatting" $$gofile; \
+		gofmt -w $$gofile; \
+	done
+
 .PHONY: run
 run:
 	- $(GOCMD) run ./main.go
 
 .PHONY: test
 test:
-	$(GOCMD) test ./...
+	$(GOCMD) test -v -race ./...
 
 .PHONY: coverage
 coverage:
