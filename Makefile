@@ -39,7 +39,7 @@ deploy: coverage build
 
 .PHONY: format
 format:
-	@for gofile in $$(find ./src/$(PROJECT) -name "*.go"); do \
+	@for gofile in $$(find ./$(PROJECT) -name "*.go"); do \
 		echo "formatting" $$gofile; \
 		gofmt -w $$gofile; \
 	done

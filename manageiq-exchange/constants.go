@@ -9,7 +9,6 @@ var COMMIT = "-"
 var BUILD_DATE = "-"
 var SERVICEAPIVERSION = "v0"
 
-
 var BANNER_3D = `
 
  _____ ______   ________  ________   ________  ________  _______   ___  ________
