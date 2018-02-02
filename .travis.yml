@@ -4,6 +4,10 @@ go:
     - 1.8.x
     - 1.9.x
     - tip
+matrix:
+  allow_failures:
+    - go: tip
+  fast_finish: true
 sudo: false
 install:
     - go get -v github.com/alecthomas/gometalinter
