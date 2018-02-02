@@ -6,29 +6,22 @@ import (
 )
 
 func TestConstants(t *testing.T) {
-
-	want := "manageiq-exchange"
-	if !reflect.DeepEqual(SERVICE, want) {
-		t.Errorf("SERVICE returned %+v, want %+v", SERVICE, want)
+	var tests = []struct {
+		message string
+		input   string
+		want    string
+	}{
+		{"SERVICE", SERVICE, "manageiq-exchange"},
+		{"RESOURCE_PREFIX", RESOURCE_PREFIX, "//manageiq-exchange"},
+		{"VERSION", VERSION, "dev"},
+		{"BUILD_DATE", BUILD_DATE, "-"},
+		{"SERVICEAPIVERSION", SERVICEAPIVERSION, "v0"},
 	}
-
-	want = "//manageiq-exchange"
-	if !reflect.DeepEqual(RESOURCE_PREFIX, want) {
-		t.Errorf("RESOURCE_PREFIX returned %+v, want %+v", RESOURCE_PREFIX, want)
-	}
-
-	want = "dev"
-	if !reflect.DeepEqual(VERSION, want) {
-		t.Errorf("VERSION returned %+v, want %+v", VERSION, want)
-	}
-
-	want = "-"
-	if !reflect.DeepEqual(BUILD_DATE, want) {
-		t.Errorf("BUILD_DATE returned %+v, want %+v", BUILD_DATE, want)
-	}
-
-	want = "v0"
-	if !reflect.DeepEqual(SERVICEAPIVERSION, want) {
-		t.Errorf("SERVICEAPIVERSION returned %+v, want %+v", SERVICEAPIVERSION, want)
+	for _, tt := range tests {
+		t.Run(tt.message, func(t *testing.T) {
+			if !reflect.DeepEqual(tt.input, tt.want) {
+				t.Errorf("%s returned %+v, want %+v", tt.message, tt.input, tt.want)
+			}
+		})
 	}
 }

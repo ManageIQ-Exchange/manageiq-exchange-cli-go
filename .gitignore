@@ -15,3 +15,8 @@
 
 # IDEs
 .idea
+
+# Go
+/pkg/
+/coverage/
+/bin/
