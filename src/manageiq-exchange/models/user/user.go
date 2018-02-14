@@ -6,9 +6,9 @@ import (
 )
 
 type User struct {
-	GithubId        int    `json:"github_id"`
+	GithubID        int    `json:"github_id"`
 	Login           string `json:"login"`
-	Url_profile     string `json:"url_profile"`
+	URLProfile      string `json:"url_profile"`
 	Name            string `json:"name"`
 	Avatar          string `json:"avatar"`
 	Company         string `json:"company"`
@@ -40,8 +40,8 @@ func (u *User) Init(data map[string]interface{}) {
 
 func (u *User) Print() string {
 	var result string
-	result = fmt.Sprintf("%s: %s (%d)\n\n", utils.PrintColor("User", "Red"), u.Login, u.GithubId)
-	result += utils.PrintValues(u, "    ", []string{"Login", "GithubId"})
+	result = fmt.Sprintf("%s: %s (%d)\n\n", utils.PrintColor("User", "Red"), u.Login, u.GithubID)
+	result += utils.PrintValues(u, "    ", []string{"Login", "GithubID"})
 	return result
 }
 

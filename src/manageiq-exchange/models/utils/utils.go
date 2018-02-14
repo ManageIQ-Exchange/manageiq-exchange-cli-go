@@ -6,8 +6,10 @@ import (
 	"reflect"
 )
 
-const NC string = "\033[0m" // No Color
+// NC is No Color
+const NC string = "\033[0m"
 
+// COLOR is color to print message with color
 var COLOR = map[string]string{
 	"Black":        "0;30",
 	"Dark Gray":    "1;30",

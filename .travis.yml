@@ -26,3 +26,8 @@ script:
       --deadline=4m ./spew | tee /dev/stderr)"
     - make test
     - make CI-Coverage
+deploy:
+  provider: script
+  script: curl -X POST https://goreportcard.com/checks -F 'repo=github.com/ManageIQ-Exchange/manageiq-exchange-cli-go'
+  on:
+    branch: master

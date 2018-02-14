@@ -15,7 +15,7 @@ func TestPrintColor(t *testing.T) {
 type SampleInterface struct {
 	Type          string `json:"type"`
 	Enabled       bool   `json:"enabled"`
-	ApplicationId string `json:"id_application"`
+	ApplicationID string `json:"id_application"`
 	Server        string `json:"server"`
 	Version       string `json:"version"`
 	Verify        bool   `json:"verify"`
@@ -25,7 +25,7 @@ func TestCreateFromMap(t *testing.T) {
 	want := SampleInterface{
 		Server:        "github.com",
 		Version:       "v3",
-		ApplicationId: "abc",
+		ApplicationID: "abc",
 	}
 	var data = map[string]interface{}{
 		"server":         "github.com",
@@ -64,22 +64,21 @@ func TestValueIsEmpty(t *testing.T) {
 	}
 }
 
-type DataFake struct {
-	Name            string
-	GithubId        int
-}
-
 func TestPrintValues(t *testing.T) {
+	type DataFake struct {
+		Name     string
+		GithubID int
+	}
+
 	var data = &DataFake{
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 
 	want := "    Name : Alberto\n"
-	got := PrintValues(data, "    ", []string{"GithubId"})
+	got := PrintValues(data, "    ", []string{"GithubID"})
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("PrintValues() returned -%+v-, want -%+v-", got, want)
 	}
 }
-

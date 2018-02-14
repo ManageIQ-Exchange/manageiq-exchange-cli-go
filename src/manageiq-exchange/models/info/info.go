@@ -13,7 +13,7 @@ type Info struct {
 type Provider struct {
 	Type          string `json:"type"`
 	Enabled       bool   `json:"enabled"`
-	ApplicationId string `json:"id_application"`
+	ApplicationID string `json:"id_application"`
 	Server        string `json:"server"`
 	Version       string `json:"version"`
 	Verify        bool   `json:"verify"`
@@ -36,7 +36,7 @@ func (a *Info) Print() string {
 	for k, v := range a.Providers {
 		result += fmt.Sprintf("    %s: \n", k)
 		result += fmt.Sprintf("        %s: %s\n", "Server", v.Server)
-		result += fmt.Sprintf("        %s: %s\n", "ApplicationId", v.ApplicationId)
+		result += fmt.Sprintf("        %s: %s\n", "ApplicationId", v.ApplicationID)
 		result += fmt.Sprintf("        %s: %s\n", "Version", v.Version)
 	}
 	return result
