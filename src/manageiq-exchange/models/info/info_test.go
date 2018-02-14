@@ -12,7 +12,7 @@ func TestInit(t *testing.T) {
 		Version: "1.0",
 		Providers: map[string]Provider{
 			"github.com": Provider{
-				ApplicationId: "abc",
+				ApplicationID: "abc",
 				Server:        "github.com",
 				Version:       "v3",
 			},
@@ -47,7 +47,7 @@ func TestPrint(t *testing.T) {
 		Version: "1.0",
 		Providers: map[string]Provider{
 			"github.com": Provider{
-				ApplicationId: "abc",
+				ApplicationID: "abc",
 				Server:        "github.com",
 				Version:       "v3",
 			},

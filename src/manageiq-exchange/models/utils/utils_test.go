@@ -64,12 +64,12 @@ func TestValueIsEmpty(t *testing.T) {
 	}
 }
 
-type DataFake struct {
-	Name            string
-	GithubId        int
-}
-
 func TestPrintValues(t *testing.T) {
+	type DataFake struct {
+		Name     string
+		GithubId int
+	}
+
 	var data = &DataFake{
 		Name:     "Alberto",
 		GithubId: 1,
@@ -82,4 +82,3 @@ func TestPrintValues(t *testing.T) {
 		t.Errorf("PrintValues() returned -%+v-, want -%+v-", got, want)
 	}
 }
-

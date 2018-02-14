@@ -31,19 +31,19 @@ func Menu() {
 	if err != nil {
 		fmt.Print(err)
 	}
-	var miq_exchange api.Api
-	miq_exchange.Init(server, port)
+	var miqExchange api.API
+	miqExchange.Init(server, port)
 
-	statusConnection := miq_exchange.CheckConnectionServer()
+	statusConnection := miqExchange.CheckConnectionServer()
 
-	if version && statusConnection{
-		info := miq_exchange.GetInfo()
+	if version && statusConnection {
+		info := miqExchange.GetInfo()
 		fmt.Printf(info.Print())
 	}
 
-	if users && statusConnection{
-		users := miq_exchange.GetUsers(expand)
-		fmt.Printf(users.Print(miq_exchange.Data.Meta.TotalCount))
+	if users && statusConnection {
+		users := miqExchange.GetUsers(expand)
+		fmt.Printf(users.Print(miqExchange.Data.Meta.TotalCount))
 	}
 }
 

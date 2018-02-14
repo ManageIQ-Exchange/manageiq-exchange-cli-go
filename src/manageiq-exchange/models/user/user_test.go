@@ -12,7 +12,7 @@ func TestUserInit(t *testing.T) {
 	want := User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	var data = map[string]interface{}{
 		"login":     "aljesusg",
@@ -33,7 +33,7 @@ func TestUserPrint(t *testing.T) {
 	user := User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	if !reflect.DeepEqual(user.Print(), want) {
 		t.Errorf("User Print returned -%+v-, want -%+v-", user.Print(), want)
@@ -44,7 +44,7 @@ func TestUserCollectionInit(t *testing.T) {
 	user := User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	users := UserCollection{}
 	users.Users = append(users.Users, user)
@@ -75,7 +75,7 @@ func TestUserCollectionPrint(t *testing.T) {
 	user := User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	userCollection := UserCollection{}
 	userCollection.Users = append(userCollection.Users, user)

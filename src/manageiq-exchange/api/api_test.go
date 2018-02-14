@@ -1,16 +1,16 @@
 package api
 
 import (
+	"fmt"
+	"manageiq-exchange/models/info"
+	meta "manageiq-exchange/models/metadata"
+	user "manageiq-exchange/models/user"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"reflect"
 	"strconv"
 	"testing"
-	"fmt"
-	meta "manageiq-exchange/models/metadata"
-	user "manageiq-exchange/models/user"
-	"manageiq-exchange/models/info"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 	mux *http.ServeMux
 
 	// client is the client being tested.
-	client *Api
+	client *API
 
 	// urlTest is the url test server
 	urlTest *url.URL
@@ -38,7 +38,7 @@ func setup() {
 	// http client configured to use test server
 	urlTest, _ = url.Parse(server.URL + "/")
 	i, _ := strconv.Atoi(urlTest.Port())
-	client = &Api{}
+	client = &API{}
 	client.Init(urlTest.Hostname(), i)
 }
 
@@ -48,7 +48,7 @@ func teardown() {
 }
 
 func TestApi_Init(t *testing.T) {
-	var server Api
+	var server API
 	inputServer := "localhost"
 	inputPort := 3000
 	wantServer := "localhost"
@@ -91,7 +91,7 @@ func TestApi_URL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.inputServer, func(t *testing.T) {
-			var server Api
+			var server API
 			server.Init(tt.inputServer, tt.inputPort)
 			gotURL := server.URL()
 			if !reflect.DeepEqual(gotURL, tt.wantURL) {
@@ -122,15 +122,15 @@ func TestApi_Request(t *testing.T) {
 		"A": "a",
 	}
 	wantMeta := meta.Metadata{
-		CurrentPage:0,
-		TotalPages:0,
-		TotalCount:0,
+		CurrentPage: 0,
+		TotalPages:  0,
+		TotalCount:  0,
 	}
-	if !reflect.DeepEqual(client.Data.Data, wantData){
+	if !reflect.DeepEqual(client.Data.Data, wantData) {
 		t.Errorf("client.Data.Data returned %+v want %+v", client.Data.Data, wantData)
 	}
 
-	if !reflect.DeepEqual(client.Data.Meta, wantMeta){
+	if !reflect.DeepEqual(client.Data.Meta, wantMeta) {
 		t.Errorf("client.Data.Meta returned %+v want %+v", client.Data.Meta, wantMeta)
 	}
 }
@@ -168,15 +168,15 @@ func TestApi_GetInfo(t *testing.T) {
 		Version: "1.0",
 		Providers: map[string]info.Provider{
 			"github.com": info.Provider{
-				ApplicationId: "abc",
+				ApplicationID: "abc",
 				Server:        "github.com",
 				Version:       "v3",
 			},
 		},
 	}
 
-	if !reflect.DeepEqual(gotInfo, wantInfo){
-		t.Errorf("Api.GetInfo() returned %+v want %+v",gotInfo , wantInfo)
+	if !reflect.DeepEqual(gotInfo, wantInfo) {
+		t.Errorf("Api.GetInfo() returned %+v want %+v", gotInfo, wantInfo)
 	}
 }
 
@@ -195,14 +195,14 @@ func TestApi_GetUsers_withoutExpandResources(t *testing.T) {
 	wantUser := user.User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	wantUsers := user.UserCollection{}
 	wantUsers.Users = append(wantUsers.Users, wantUser)
 	wantUsers.Total = len(wantUsers.Users)
 
-	if !reflect.DeepEqual(gotUsers, wantUsers){
-		t.Errorf("Api.GetUsers(false) returned %+v want %+v",gotUsers , wantUsers)
+	if !reflect.DeepEqual(gotUsers, wantUsers) {
+		t.Errorf("Api.GetUsers(false) returned %+v want %+v", gotUsers, wantUsers)
 	}
 }
 
@@ -221,13 +221,13 @@ func TestApi_GetUsers_withExpandResources(t *testing.T) {
 	wantUser := user.User{
 		Login:    "aljesusg",
 		Name:     "Alberto",
-		GithubId: 1,
+		GithubID: 1,
 	}
 	wantUsers := user.UserCollection{}
 	wantUsers.Users = append(wantUsers.Users, wantUser)
 	wantUsers.Total = len(wantUsers.Users)
 
-	if !reflect.DeepEqual(gotUsers, wantUsers){
-		t.Errorf("Api.GetUsers(true) returned %+v want %+v",gotUsers , wantUsers)
+	if !reflect.DeepEqual(gotUsers, wantUsers) {
+		t.Errorf("Api.GetUsers(true) returned %+v want %+v", gotUsers, wantUsers)
 	}
 }
